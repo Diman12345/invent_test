@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Show Produk MobileCom</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <script src="jQuery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+    <table id="dataProduk" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Nama Barang</th>
+                <th>Jumlah Barang</th>
+                <th>Kode Barang</th>
+                <th>Tanggal</th>
+            </tr>
+        </thead>
+    </table>
+
+</body>
+
+<script>
+    $(document).ready(function() {
+        $('#datatable').DataTable({
+            contentType: "application/json; charset=utf-8",
+            searching: true,
+            processing: true,
+            destroy: true,
+            cache: true,
+            PaginationType: "full",
+            ajax: {
+                "url": "http://localhost:3306/test_core/get_product",
+                "type": "GET",
+                "headers": {
+                    'Content-Type': 'application/json'
+                },
+                "dataSrc": "value"
+            },
+            responsive:true,
+            columns: [
+                {"data": "id"},
+                {"data": "nama_barang"},
+                {"data": "kode_barang"},
+                {"data": "jumlah_barang"},
+                {"data": "tanggal"}
+            ],
+            columnDefs: [{
+                    targets: ['_all'],
+                    searchable: true,
+                    sortable: true,
+                    visible: true,
+                    defaultContent: ""
+                }
+            ]
+        });
+    } );
+</script>
+</html>
